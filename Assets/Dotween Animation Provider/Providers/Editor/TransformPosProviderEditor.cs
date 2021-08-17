@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using UnityEditor;
 using UnityEngine;
+using zFramework.Extension;
 using Object = UnityEngine.Object;
 
 [CustomEditor(typeof(TransformPosProvider))]

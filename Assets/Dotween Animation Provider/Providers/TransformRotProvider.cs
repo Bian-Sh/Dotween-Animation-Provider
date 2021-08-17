@@ -30,13 +30,14 @@ public class TransformRotProvider : MonoBehaviour,IDoTweenAnimProviderBehaviours
     private void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
     private void Reset() => endValue = isLocal ? transform.localEulerAngles : transform.eulerAngles;
     #endregion
-    public void Play()
+    public Tweener Play()
     {
         tweener = (isLocal ? transform.DOLocalRotate(endValue, duration, rotateMode) : transform.DORotate(endValue, duration, rotateMode))
                         .SetDelay(delay)
                         .SetEase(ease)
                         .SetLoops(loopcount, loopType);
         IsPlaying = true;
+        return tweener;
     }
     public void Stop()
     {

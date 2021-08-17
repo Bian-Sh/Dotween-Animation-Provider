@@ -33,13 +33,14 @@ public class RectTransformDeltaSizeProvider : MonoBehaviour,IDoTweenAnimProvider
     private void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
     private void Reset() => endValue = (transform as RectTransform).sizeDelta;
     #endregion
-    public void Play()
+    public Tweener Play()
     {
         tweener = rectTransform.DOSizeDelta(endValue, duration,snapping) 
                         .SetDelay(delay)
                         .SetEase(ease)
                         .SetLoops(loopcount, loopType);
         IsPlaying = true;
+        return tweener;
     }
     public void Stop()
     {

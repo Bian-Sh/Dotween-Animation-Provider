@@ -30,13 +30,14 @@ public class TransformPosProvider : MonoBehaviour,IDoTweenAnimProviderBehaviours
     private void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
     private void Reset() => endValue = isLocal ? transform.localPosition : transform.position;
     #endregion
-    public void Play()
+    public Tweener Play()
     {
         tweener = (isLocal ? transform.DOLocalMove(endValue, duration,snapping) : transform.DOMove(endValue, duration, snapping))
                         .SetDelay(delay)
                         .SetEase(ease)
                         .SetLoops(loopcount, loopType);
         IsPlaying = true;
+        return tweener;
     }
     public void Stop()
     {

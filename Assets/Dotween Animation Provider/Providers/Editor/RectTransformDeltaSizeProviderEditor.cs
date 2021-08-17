@@ -16,7 +16,6 @@ class RectTransformDeltaSizeProviderEditor : Editor
         {
             StopPreview();
         }
-        Undo.ClearUndo(provider);
     }
 
     private void OnEnable()
@@ -31,7 +30,6 @@ class RectTransformDeltaSizeProviderEditor : Editor
         if (obj == PlayModeStateChange.ExitingEditMode && DOTweenEditorPreview.isPreviewing)
         {
             StopPreview();
-            Undo.ClearUndo(provider);
         }
     }
 
@@ -72,9 +70,6 @@ class RectTransformDeltaSizeProviderEditor : Editor
     {
         DOTweenEditorPreview.Start();
         provider.Play();
-        Undo.GetCurrentGroupName();
-        key = $"CaptureObjectStateForTweening{DateTime.Now.Millisecond}";
-        Undo.RegisterCompleteObjectUndo(provider, key);
         DOTweenEditorPreview.PrepareTweenForPreview(provider.tweener);
         provider.tweener.OnComplete(StopPreview);
     }

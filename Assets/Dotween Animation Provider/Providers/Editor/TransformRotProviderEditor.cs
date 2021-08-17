@@ -8,14 +8,6 @@ using Object = UnityEngine.Object;
 [CustomEditor(typeof(TransformRotProvider))]
 class TransformRotProviderEditor : Editor
 {
-    private void Awake()
-    {
-        Debug.Log($"{nameof(TransformRotProviderEditor)}: Editor Awake");
-    }
-    private void OnDestroy()
-    {
-        Debug.Log($"{nameof(TransformRotProviderEditor)}: Editor Destroy");
-    }
     TransformRotProvider provider;
     private void OnDisable()
     {

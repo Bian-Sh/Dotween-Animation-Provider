@@ -4,7 +4,6 @@ public interface IDoTweenAnimProviderBehaviours
 {
     Tweener Tweener { get; }
     bool IsPlaying { get; }
-
-    void Play();
+    Tweener Play();
     void Stop();
 }

@@ -1,36 +1,19 @@
-using System;
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-public class DotweenAnimProviderManager : MonoBehaviour
+namespace zFramework.Extension
 {
-    public List<IDoTweenAnimProviderBehaviours> Tweeners => ReloadSubProviders();
-   internal List<IDoTweenAnimProviderBehaviours> ReloadSubProviders() 
+    public class DotweenAnimProviderManager : MonoBehaviour
     {
-        var tweeners = new List<IDoTweenAnimProviderBehaviours>();
-        tweeners.Clear();
-        tweeners.AddRange(GetComponentsInChildren<IDoTweenAnimProviderBehaviours>());
-        return tweeners;
-    }
-
-    public void Stop()
-    {
-        isPerformPreviewing = false;
-        foreach (var item in  Tweeners)
+        public List<IDoTweenAnimProviderBehaviours> Providers => ReloadSubProviders();
+        internal List<IDoTweenAnimProviderBehaviours> ReloadSubProviders()
         {
-            item.Stop();
+            var tweeners = new List<IDoTweenAnimProviderBehaviours>();
+            tweeners.Clear();
+            tweeners.AddRange(GetComponentsInChildren<IDoTweenAnimProviderBehaviours>());
+            return tweeners;
         }
     }
-    public void Play()
-    {
-        isPerformPreviewing = true;
-        foreach (var item in Tweeners)
-        {
-            item.Play();
-        }
-    }
-    private bool isPerformPreviewing = false;
-    public bool IsTweening=>isPerformPreviewing&&(Tweeners.Select(v => v.IsPlaying).Any(x=>x));
 }
