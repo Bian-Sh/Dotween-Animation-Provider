@@ -36,7 +36,7 @@ public class TextMeshProNumScrollerEditor : Editor
 
     private void OnUpdate()
     {
-
+        EditorUtility.SetDirty(text); // Refresh views
     }
 
     void OnDisable() 
