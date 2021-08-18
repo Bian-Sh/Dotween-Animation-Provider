@@ -1,8 +1,13 @@
-﻿using System;
+﻿// ---------------------------------------------------------------------------- 
+// Author: Ryan Hipple
+// Date:   05/01/2018
+// ----------------------------------------------------------------------------
+
+using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace zFramework.Editors.Extension
+namespace RoboRyanTron.SearchableEnum.Editor
 {
     /// <summary>
     /// Draws the custom enum selector popup for enum fileds using the

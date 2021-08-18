@@ -1,10 +1,6 @@
 using DG.DOTweenEditor;
-using DG.Tweening;
-using System;
 using UnityEditor;
 using UnityEngine;
-using zFramework.Editors.Extension;
-using zFramework.Extension;
 namespace zFramework.Extension.Tweening
 {
     [CustomEditor(typeof(DotweenAnimProviderManager))]
@@ -13,12 +9,7 @@ namespace zFramework.Extension.Tweening
         DotweenAnimProviderManager manager;
         private HideFlags cached;
         const string info = @"
-1. 仅对子节点下的 Provider 有效。
-2. 停止预览将恢复到预览前状态。
-3. Manager 转变为 Disable 将停止所有预览。
-4. Play 时将停止所有预览。
-5. 点击他处导致的管理器复位，会定位到管理器一次，此为正常。
-6. 开始/停止预览仅代表预览功能开启状态，不代表动画运行状态。
+用于驱动自身及其子节点的 Provider
 ";
         private void OnDisable()
         {
@@ -46,7 +37,7 @@ namespace zFramework.Extension.Tweening
 
         public override void OnInspectorGUI()
         {
-            GUI.enabled = !Application.isPlaying && manager.gameObject.activeInHierarchy && (manager.hideFlags != HideFlags.NotEditable || manager.IsPreviewing());
+            GUI.enabled = !EditorApplication.isPlayingOrWillChangePlaymode && manager.gameObject.activeInHierarchy && (manager.hideFlags != HideFlags.NotEditable || manager.IsPreviewing());
             EditorStyles.helpBox.fontSize = 13;
             EditorGUILayout.HelpBox(info, MessageType.Info);
             bool isPreviewing = manager.IsPreviewing();

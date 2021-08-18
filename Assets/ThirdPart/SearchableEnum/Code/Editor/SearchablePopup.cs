@@ -1,9 +1,14 @@
-﻿using System;
+﻿// ---------------------------------------------------------------------------- 
+// Author: Ryan Hipple
+// Date:   05/01/2018
+// ----------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace zFramework.Editors.Extension
+namespace RoboRyanTron.SearchableEnum.Editor
 {
     /// <summary>
     /// A popup window that displays a list of options and may use a search

@@ -1,9 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
-using zFramework;
 namespace zFramework.Extension.Tweening
 {
-
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
     public class RectTransformDeltaSizeProvider : DoTweenBaseProvider
     {
@@ -11,11 +9,7 @@ namespace zFramework.Extension.Tweening
         public Vector3 endValue = Vector3.zero;
         [HideInInspector]
         public RectTransform rectTransform => transform as RectTransform;
-
-        #region Engine Func
-        private void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
         private void Reset() => endValue = (transform as RectTransform).sizeDelta;
-        #endregion
         public override Tweener InitTween()
         {
             target = rectTransform;

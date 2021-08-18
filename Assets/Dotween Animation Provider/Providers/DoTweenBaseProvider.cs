@@ -1,12 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
-using zFramework.Editors.Extension;
+using RoboRyanTron.SearchableEnum;
 
 namespace zFramework.Extension.Tweening
 {
     public abstract class DoTweenBaseProvider : MonoBehaviour, IDoTweenProviderBehaviours
     {
         [HideInInspector] public Object target;
+        [Tooltip("勾上后，每次当游戏对象激活时开始播放动画")]
         public bool playOnAwake = true;
         public float delay = 0f;
         public float duration = 2f;
@@ -26,24 +27,18 @@ namespace zFramework.Extension.Tweening
         public virtual void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
         public virtual void Play()
         {
-            if (tweener != null)
-            {
-                tweener.Kill();
-                tweener = null;
-            }
-            tweener = InitTween()
-                    .SetDelay(delay)
-                     .SetEase(ease)
-                    .SetLoops(loopcount, loopType);
+            tweener?.Kill();
+            tweener = null;
+            tweener = InitTween();
             if (!target) target = (Object)tweener.target;
-            tweener.SetTarget(target);
+            tweener.SetDelay(delay)
+                         .SetEase(ease)
+                         .SetLoops(loopcount, loopType)
+                         .SetTarget(target);
         }
 
         public abstract Tweener InitTween();
 
-        public virtual void Stop()
-        {
-            tweener?.Kill();
-        }
+        public virtual void Stop()=>tweener?.Kill();
     }
 }

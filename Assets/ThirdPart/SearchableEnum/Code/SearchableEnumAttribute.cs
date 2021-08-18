@@ -1,6 +1,12 @@
-﻿using System;
+﻿// ---------------------------------------------------------------------------- 
+// Author: Ryan Hipple
+// Date:   05/01/2018
+// ----------------------------------------------------------------------------
+
+using System;
 using UnityEngine;
-namespace zFramework.Editors.Extension
+
+namespace RoboRyanTron.SearchableEnum
 {
     /// <summary>
     /// Put this attribute on a public (or SerialzeField) enum in a

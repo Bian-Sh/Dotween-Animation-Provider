@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using zFramework.Extension;
 using UnityEditor;
 
 namespace zFramework.Extension.Tweening
@@ -36,7 +35,7 @@ namespace zFramework.Extension.Tweening
         public static void StartPreview(this IDoTweenProviderBehaviours provider, TweenCallback OnUpdate = null)
         {
             if (null == provider) return;
-            provider.Play(); 
+            provider.Play();
             var tweener = provider.Tweener;
             if (!tweeners.Contains(tweener))
             {
@@ -51,7 +50,6 @@ namespace zFramework.Extension.Tweening
             tweener.OnComplete(() => TweenerPostProcess(provider));
             tweener.OnUpdate(OnUpdate);
         }
-
         public static void StopPreview(this DotweenAnimProviderManager manager)
         {
             if (null == manager) return;
@@ -63,6 +61,7 @@ namespace zFramework.Extension.Tweening
         public static void StartPreview(this DotweenAnimProviderManager manager)
         {
             if (null == manager) return;
+            Debug.Assert(manager.Providers.Count != 0,"Manager 及其子节点下未发现 Dotween Provider");
             foreach (var provider in manager.Providers)
             {
                 provider.StartPreview();
@@ -138,7 +137,7 @@ namespace zFramework.Extension.Tweening
                 tweener.Reset(); //复位 Dotween 的修改
 
                 tweeners.Remove(tweener);
-                UpdateManagerState();
+               // UpdateManagerState();
             }
         }
 
