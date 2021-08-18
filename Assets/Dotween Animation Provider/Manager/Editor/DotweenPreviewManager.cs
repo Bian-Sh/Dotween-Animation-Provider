@@ -61,7 +61,7 @@ namespace zFramework.Extension.Tweening
         public static void StartPreview(this DotweenAnimProviderManager manager)
         {
             if (null == manager) return;
-            Debug.Assert(manager.Providers.Count != 0,"Manager 及其子节点下未发现 Dotween Provider");
+            Debug.Assert(manager.Providers.Count != 0, "Manager 及其子节点下未发现 Dotween Provider");
             foreach (var provider in manager.Providers)
             {
                 provider.StartPreview();
@@ -70,7 +70,12 @@ namespace zFramework.Extension.Tweening
 
         public static bool IsPreviewing(this IDoTweenProviderBehaviours provider)
         {
-            return null != provider && null != provider.Tweener && provider.Tweener.IsPlaying() && tweeners.Contains(provider.Tweener);
+            return !EditorApplication.isPlayingOrWillChangePlaymode 
+                && null != provider 
+                && null != provider.Tweener 
+                && provider.Tweener.active
+                && provider.Tweener.IsPlaying() 
+                && tweeners.Contains(provider.Tweener);
         }
         public static bool IsPreviewing(this DotweenAnimProviderManager manager)
         {
@@ -135,9 +140,8 @@ namespace zFramework.Extension.Tweening
             {
                 provider.Stop();
                 tweener.Reset(); //复位 Dotween 的修改
-
                 tweeners.Remove(tweener);
-               // UpdateManagerState();
+                UpdateManagerState();
             }
         }
 
