@@ -1,46 +1,26 @@
-using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 
-public class TextMeshProNumScroller : MonoBehaviour, IDoTweenAnimProviderBehaviours
+namespace zFramework.Extension.Tweening
 {
-    public TextMeshProUGUI text;
-    public int value;
-    public float duration = 2f;
-    public int loopcount = 0;
-    public LoopType loopType = LoopType.Restart;
-    public Ease ease = Ease.Linear;
-    public TweenerCore<int,int,NoOptions> tweener;
+    public class TextMeshProNumScroller : DoTweenBaseProvider
+    {
+        public TextMeshProUGUI text;
+        public int value;
 
-    public Tweener Tweener => tweener;
-    public bool IsPlaying => null != tweener && tweener.IsPlaying();
-
-    private void OnEnable()
-    {
-        Play();
-    }
-    private void OnDisable()
-    {
-        Stop();
-    }
-
-    public Tweener Play()
-    {
-        Stop();
-        tweener = DOTween.To(() => 0, y => text.text=y.ToString(), value, duration) //tostring 高GC
-                .SetEase(ease)
-                .SetLoops(loopcount, loopType)
-                .SetTarget(text);
-        return tweener;
-    }
-    public void Stop()
-    {
-        if (tweener != null)
+        public override Tweener InitTween()
         {
-            tweener.Kill();
-            tweener = null;
+            target = text;// 这一步绝对不能少
+            return DOTween.To(() => 0, y => text.text = y.ToString(), value, duration); //tostring 高GC
+        }
+
+        public override void Play()
+        {
+            base.Play();
+        }
+        public override void Stop()
+        {
+            base.Stop();
         }
     }
 }

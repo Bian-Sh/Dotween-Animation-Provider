@@ -6,9 +6,8 @@ using System.Reflection;
 using UnityEngine;
 using zFramework.Extension;
 using UnityEditor;
-using System;
 
-namespace zFramework.Editor.Extension
+namespace zFramework.Extension.Tweening
 {
     public static class DotweenPreviewManager
     {
@@ -28,17 +27,17 @@ namespace zFramework.Editor.Extension
                 DOTweenEditorPreview.Stop(true);
             }
         }
-        #region ¿©’π∑Ω∑®
-        public static void StopPreview(this IDoTweenAnimProviderBehaviours provider)
+        #region Êâ©Â±ïÊñπÊ≥ï
+        public static void StopPreview(this IDoTweenProviderBehaviours provider)
         {
             if (null == provider) return;
             TweenerPostProcess(provider);
         }
-        public static void StartPreview(this IDoTweenAnimProviderBehaviours provider,TweenCallback OnUpdate=null)
+        public static void StartPreview(this IDoTweenProviderBehaviours provider, TweenCallback OnUpdate = null)
         {
             if (null == provider) return;
-            var tweener = provider.Play();
-
+            provider.Play(); 
+            var tweener = provider.Tweener;
             if (!tweeners.Contains(tweener))
             {
                 tweeners.Add(tweener);
@@ -48,7 +47,7 @@ namespace zFramework.Editor.Extension
                 DOTweenEditorPreview.Start();
             }
             DOTweenEditorPreview.PrepareTweenForPreview(tweener);
-            // ◊¢≤·ªÿµ˜£¨ŒÒ±ÿ‘⁄◊Ó∫Ûº”º‡Ã˝
+            // Ê≥®ÂÜåÂõûË∞ÉÔºåÂä°ÂøÖÂú®ÊúÄÂêéÂä†ÁõëÂê¨
             tweener.OnComplete(() => TweenerPostProcess(provider));
             tweener.OnUpdate(OnUpdate);
         }
@@ -70,7 +69,7 @@ namespace zFramework.Editor.Extension
             }
         }
 
-        public static bool IsPreviewing(this IDoTweenAnimProviderBehaviours provider)
+        public static bool IsPreviewing(this IDoTweenProviderBehaviours provider)
         {
             return null != provider && null != provider.Tweener && provider.Tweener.IsPlaying() && tweeners.Contains(provider.Tweener);
         }
@@ -81,7 +80,7 @@ namespace zFramework.Editor.Extension
         #endregion
 
         #region Assistance Funtion
-        static void SetHideFlags(this IDoTweenAnimProviderBehaviours provider, HideFlags hideFlags)
+        static void SetHideFlags(this IDoTweenProviderBehaviours provider, HideFlags hideFlags)
         {
             ((Component)provider).gameObject.hideFlags = hideFlags;
         }
@@ -130,13 +129,13 @@ namespace zFramework.Editor.Extension
             }
         }
 
-        private static void TweenerPostProcess(IDoTweenAnimProviderBehaviours provider)
+        private static void TweenerPostProcess(IDoTweenProviderBehaviours provider)
         {
             var tweener = provider.Tweener;
             if (tweeners.Contains(tweener))
             {
                 provider.Stop();
-                tweener.Reset(); //∏¥Œª Dotween µƒ–ﬁ∏ƒ
+                tweener.Reset(); //Â§ç‰Ωç Dotween ÁöÑ‰øÆÊîπ
 
                 tweeners.Remove(tweener);
                 UpdateManagerState();

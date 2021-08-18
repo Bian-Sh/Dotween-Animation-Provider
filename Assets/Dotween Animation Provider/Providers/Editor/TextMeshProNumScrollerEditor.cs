@@ -1,17 +1,18 @@
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using zFramework.Editor.Extension;
+using zFramework.Editors.Extension;
+using zFramework.Extension.Tweening;
 
 [CustomEditor(typeof(TextMeshProNumScroller))]
 public class TextMeshProNumScrollerEditor : Editor
 {
-    IDoTweenAnimProviderBehaviours scroller;
+    IDoTweenProviderBehaviours scroller;
     GameObject gameObject;
     TextMeshProUGUI text;
     private void OnEnable()
     {
-        scroller = target as IDoTweenAnimProviderBehaviours;
+        scroller = target as IDoTweenProviderBehaviours;
         gameObject = ((Component)scroller).gameObject;
         text = gameObject.GetComponent<TextMeshProUGUI>();
     }

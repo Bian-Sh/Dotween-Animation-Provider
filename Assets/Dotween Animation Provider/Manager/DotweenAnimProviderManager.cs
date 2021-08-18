@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace zFramework.Extension
+namespace zFramework.Extension.Tweening
 {
     public class DotweenAnimProviderManager : MonoBehaviour
     {
-        public List<IDoTweenAnimProviderBehaviours> Providers => ReloadSubProviders();
-        internal List<IDoTweenAnimProviderBehaviours> ReloadSubProviders()
+        public List<IDoTweenProviderBehaviours> Providers => ReloadSubProviders();
+        internal List<IDoTweenProviderBehaviours> ReloadSubProviders()
         {
-            var tweeners = new List<IDoTweenAnimProviderBehaviours>();
+            var tweeners = new List<IDoTweenProviderBehaviours>();
             tweeners.Clear();
-            tweeners.AddRange(GetComponentsInChildren<IDoTweenAnimProviderBehaviours>());
+            tweeners.AddRange(GetComponentsInChildren<IDoTweenProviderBehaviours>());
             return tweeners;
         }
     }

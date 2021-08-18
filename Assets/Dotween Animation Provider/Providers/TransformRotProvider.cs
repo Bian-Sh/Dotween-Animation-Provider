@@ -1,50 +1,25 @@
 using UnityEngine;
 using DG.Tweening;
-using RoboRyanTron.SearchableEnum;
-[DisallowMultipleComponent]
-public class TransformRotProvider : MonoBehaviour,IDoTweenAnimProviderBehaviours
+namespace zFramework.Extension.Tweening
 {
-    public bool playOnAwake = true;
-    public bool isLocal = true;
-    public float delay = 0f;
-    public float duration = 1f;
-    public int loopcount = 0;
-    public LoopType loopType = LoopType.Restart;
-    [SearchableEnum]
-    public Ease ease = Ease.Linear;
-    public RotateMode rotateMode = RotateMode.Fast;
-    public Vector3 endValue = Vector3.zero;
-    public Tweener Tweener=>tweener;
-    public Tweener tweener;
-    public bool IsPlaying { get; private set; }
-
-    #region Engine Func
-    void OnEnable()
+    [DisallowMultipleComponent]
+    public class TransformRotProvider:DoTweenBaseProvider
     {
-        if (playOnAwake)
+        public bool isLocal = true;
+        public RotateMode rotateMode = RotateMode.Fast;
+        public Vector3 endValue = Vector3.zero;
+        
+        private void Reset() => endValue = isLocal ? transform.localEulerAngles : transform.eulerAngles;
+       
+        public override Tweener InitTween()
         {
-            Play();
+            return isLocal ? transform.DOLocalRotate(endValue, duration, rotateMode) : transform.DORotate(endValue, duration, rotateMode);
         }
-    }
-    void OnDisable() => Stop();
-    private void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
-    private void Reset() => endValue = isLocal ? transform.localEulerAngles : transform.eulerAngles;
-    #endregion
-    public Tweener Play()
-    {
-        tweener = (isLocal ? transform.DOLocalRotate(endValue, duration, rotateMode) : transform.DORotate(endValue, duration, rotateMode))
-                        .SetDelay(delay)
-                        .SetEase(ease)
-                        .SetLoops(loopcount, loopType);
-        IsPlaying = true;
-        return tweener;
-    }
-    public void Stop()
-    {
-        IsPlaying = false;
-        //this.transform.DOKill(); //此 api 必须找到tween所影响的object 且不会将 tweener 置空
-        tweener?.Rewind(); //复位 Dotween 所作的修改
-        tweener?.Kill();
-        tweener = null;
+        public override void Stop()
+        {
+            base.Stop();
+            tweener?.Rewind(); //复位 Dotween 所作的修改
+            tweener = null;
+        }
     }
 }

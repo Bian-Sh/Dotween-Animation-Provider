@@ -285,12 +285,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c0df42b4413b649974590119ffdb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 406865378}
-  value: 300
-  duration: 2
-  loopcount: -1
+  target: {fileID: 406865378}
+  playOnAwake: 1
+  delay: 0
+  duration: 0.5
+  loopcount: 1
   loopType: 0
   ease: 1
+  text: {fileID: 406865378}
+  value: 5000
 --- !u!114 &406865378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -344,8 +347,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -438,15 +441,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c62a5a29f42ba4391a1ee213fa2fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   playOnAwake: 1
-  snapping: 0
   delay: 0
   duration: 2
   loopcount: -1
   loopType: 1
   ease: 9
+  snapping: 0
   endValue: {x: 150, y: 150, z: 0}
-  <IsPlaying>k__BackingField: 0
 --- !u!114 &685599895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,16 +462,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ece8d26338e5f428f61daa0668aa33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   playOnAwake: 1
-  isLocal: 1
   delay: 0
   duration: 2
   loopcount: -1
   loopType: 0
   ease: 1
+  isLocal: 1
   rotateMode: 1
   endValue: {x: -0, y: 0, z: 360}
-  <IsPlaying>k__BackingField: 0
 --- !u!114 &685599896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,16 +735,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ece8d26338e5f428f61daa0668aa33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 976429041}
   playOnAwake: 1
-  isLocal: 1
   delay: 0
   duration: 2
   loopcount: -1
   loopType: 0
   ease: 1
+  isLocal: 1
   rotateMode: 1
   endValue: {x: -0, y: 0, z: 360}
-  <IsPlaying>k__BackingField: 0
 --- !u!114 &976429043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,15 +794,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c62a5a29f42ba4391a1ee213fa2fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 976429041}
   playOnAwake: 1
-  snapping: 0
   delay: 0
   duration: 2
   loopcount: -1
   loopType: 1
   ease: 9
+  snapping: 0
   endValue: {x: 150, y: 150, z: 0}
-  <IsPlaying>k__BackingField: 0
 --- !u!1 &1053279793
 GameObject:
   m_ObjectHideFlags: 0
