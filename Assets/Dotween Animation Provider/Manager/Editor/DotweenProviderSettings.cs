@@ -7,6 +7,7 @@ using UnityEngine;
 public class DotweenProviderSettings : ScriptableObject
 {
     [Header("将预览时需要刷新的组件类型放在这儿")]
+    [Tooltip("在编辑器中预览时，有些组件不会出现效果，那是因为需要实时刷新，把这些组件放到这儿，预览管理器就会对他们的实例进行刷新了")]
     public List<MonoScript> types = new List<MonoScript>();
     static DotweenProviderSettings m_Instance;
     static DotweenProviderSettings Instance
@@ -21,17 +22,21 @@ public class DotweenProviderSettings : ScriptableObject
         }
     }
 
-    void Awake() 
+    void Awake()
     {
-        //预设 这两个已知的必须刷新的组件
+        //已知 图形学 组件预览时要主动去刷新，先预设到列表中
         types = new List<MonoScript>();
-        types.Add(GetScriptAssetsByType(typeof(TMPro.TextMeshProUGUI)));
-        types.Add(GetScriptAssetsByType(typeof(UnityEngine.UI.Text)));
+        types.Add(GetScriptAssetsByType(typeof(UnityEngine.UI.Graphic)));
     }
 
     internal static bool VerifyTargetNeedSetDirty(UnityEngine.Object target)
     {
-        return Instance.types.Exists(v=>v.GetClass() == target.GetType());
+        Predicate<MonoScript> predicate = v =>
+        {
+            return v.GetClass().IsAssignableFrom(target.GetType())
+                      || v.GetClass() == target.GetType();
+        };
+        return Instance.types.Exists(predicate);
     }
 
     #region Assistance Function

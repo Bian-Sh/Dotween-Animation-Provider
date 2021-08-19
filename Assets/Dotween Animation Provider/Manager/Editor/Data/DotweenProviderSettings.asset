@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: DotweenProviderSettings
   m_EditorClassIdentifier: 
   types:
-  - {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  - {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  - {fileID: 11500000, guid: a6238e9452bfc704f82ff36791fe1a45, type: 3}
