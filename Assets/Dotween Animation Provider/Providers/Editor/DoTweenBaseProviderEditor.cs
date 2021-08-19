@@ -14,6 +14,7 @@ namespace zFramework.Extension.Tweening
         bool fd1 = true;
         GUIStyle bt;
         GUIStyle fds;
+        SerializedProperty loopcount;
         public override void OnInspectorGUI()
         {
             #region Init GUIStyle
@@ -22,9 +23,13 @@ namespace zFramework.Extension.Tweening
             fds.onNormal.textColor = Color.white;
             #endregion
 
-            var providers = provider.GetComponents<DoTweenBaseProvider>();
             GUI.enabled = EditorApplication.isPlaying || !provider.IsPreviewing();
             serializedObject.Update();
+            #region 数据校验
+            loopcount = loopcount ?? serializedObject.FindProperty("loopcount");
+            loopcount.intValue = loopcount.intValue < -1 ? -1 : loopcount.intValue;
+            #endregion
+
             var itr = serializedObject.GetIterator();
             itr.NextVisible(true);
             fd0 = EditorGUILayout.Foldout(fd0, " 通用参数 ", fds);
@@ -71,6 +76,8 @@ namespace zFramework.Extension.Tweening
                     provider.StartPreview(OnTweenerUpdating);
                 }
             }
+
+            var providers = provider.GetComponents<DoTweenBaseProvider>();
             if (null != providers && providers.Length > 1)
             {
                 var anyispreviewing = providers.Any(v => v.IsPreviewing());
@@ -100,7 +107,7 @@ namespace zFramework.Extension.Tweening
         {
             //TextMeshPro UGUI 需要通过这个方式刷新
             // 同理，不排除其他组件也需要 SetDirty ，可以在扩展时留意
-            if (provider.target is TextMeshProUGUI)
+            if (provider.target is TextMeshProUGUI|| provider.target is UnityEngine.UI.Text)
             {
                 EditorUtility.SetDirty(provider.target);
             }
@@ -109,7 +116,7 @@ namespace zFramework.Extension.Tweening
         {
             //TextMeshPro UGUI 需要通过这个方式刷新
             // 同理，不排除其他组件也需要 SetDirty ，可以在扩展时留意
-            if (provider.target is TextMeshProUGUI)
+            if (provider.target is TextMeshProUGUI || provider.target is UnityEngine.UI.Text)
             {
                 EditorUtility.SetDirty(provider.target);
             }

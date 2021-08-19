@@ -25,7 +25,7 @@ namespace zFramework.Extension.Tweening
             if (playOnAwake) Play();
         }
         public virtual void OnDisable() => Stop();
-        public virtual void OnValidate() => loopcount = loopcount < -1 ? -1 : loopcount;
+        public virtual void OnValidate() { }
         public virtual void Play()
         {
             tweener?.Kill();
