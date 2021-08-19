@@ -9,13 +9,20 @@ namespace zFramework.Extension.Tweening
     {
         [Header("颜色变化、颜色混合、渐隐渐显，都请用该组件实现")]
         public Color endValue = default;
-        private Graphic graphic;
+        [HideInInspector]
+        public Graphic graphic;
 
+        private void Awake() => graphic = GetComponent<Graphic>();
+
+        #region 编辑器下初始化和空引用防治举措
+        public override void OnValidate() => graphic = graphic ?? GetComponent<Graphic>();
         private void Reset()
         {
             graphic = GetComponent<Graphic>();
             endValue = graphic.color; //捕获初始值
         }
+        #endregion
+
         public override Tweener InitTween()
         {
             var arr = GetComponents<GraphicColorChangeProvider>();

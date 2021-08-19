@@ -3,13 +3,13 @@ using UnityEditor;
 using UnityEngine;
 namespace zFramework.Extension.Tweening
 {
-    [CustomEditor(typeof(DotweenAnimProviderManager))]
-    class DotweenAnimProviderManagerEditor : Editor
+    [CustomEditor(typeof(DotweenProviderManager))]
+    class DotweenProviderManagerEditor : Editor
     {
-        DotweenAnimProviderManager manager;
+        DotweenProviderManager manager;
         private HideFlags cached;
         const string info = @"
-用于驱动自身及其子节点的 Provider
+用于驱动自身及其子节点挂载的 Provider
 ";
         private void OnDisable()
         {
@@ -21,7 +21,7 @@ namespace zFramework.Extension.Tweening
         }
         private void OnEnable()
         {
-            manager = target as DotweenAnimProviderManager;
+            manager = target as DotweenProviderManager;
             //manager.gameObject.hideFlags = HideFlags.None;
             EditorApplication.playModeStateChanged += EditorApplication_playModeStateChanged;
         }

@@ -51,7 +51,7 @@ namespace zFramework.Extension.Tweening
             .OnUpdate(OnUpdate)
             .OnStart(OnStart);
         }
-        public static void StopPreview(this DotweenAnimProviderManager manager)
+        public static void StopPreview(this DotweenProviderManager manager)
         {
             if (null == manager) return;
             foreach (var provider in manager.Providers)
@@ -59,7 +59,7 @@ namespace zFramework.Extension.Tweening
                 provider.StopPreview();
             }
         }
-        public static void StartPreview(this DotweenAnimProviderManager manager)
+        public static void StartPreview(this DotweenProviderManager manager)
         {
             if (null == manager) return;
             Debug.Assert(manager.Providers.Count != 0, "Manager 及其子节点下未发现 Dotween Provider");
@@ -78,7 +78,7 @@ namespace zFramework.Extension.Tweening
                 && provider.Tweener.IsPlaying() 
                 && tweeners.Contains(provider.Tweener);
         }
-        public static bool IsPreviewing(this DotweenAnimProviderManager manager)
+        public static bool IsPreviewing(this DotweenProviderManager manager)
         {
             return manager.Providers.Any(v => v.IsPreviewing());
         }

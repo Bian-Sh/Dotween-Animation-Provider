@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace zFramework.Extension.Tweening
 {
-    public class DotweenAnimProviderManager : MonoBehaviour
+    public class DotweenProviderManager : MonoBehaviour
     {
         public List<IDoTweenProviderBehaviours> Providers => new List<IDoTweenProviderBehaviours>(GetComponentsInChildren<IDoTweenProviderBehaviours>());
     }
