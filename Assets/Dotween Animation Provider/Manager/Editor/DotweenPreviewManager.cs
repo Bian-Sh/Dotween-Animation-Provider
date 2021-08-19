@@ -32,7 +32,7 @@ namespace zFramework.Extension.Tweening
             if (null == provider) return;
             TweenerPostProcess(provider);
         }
-        public static void StartPreview(this IDoTweenProviderBehaviours provider, TweenCallback OnUpdate = null)
+        public static void StartPreview(this IDoTweenProviderBehaviours provider, TweenCallback OnStart= null,TweenCallback OnUpdate = null)
         {
             if (null == provider) return;
             provider.Play();
@@ -47,8 +47,9 @@ namespace zFramework.Extension.Tweening
             }
             DOTweenEditorPreview.PrepareTweenForPreview(tweener);
             // 注册回调，务必在最后加监听
-            tweener.OnComplete(() => TweenerPostProcess(provider));
-            tweener.OnUpdate(OnUpdate);
+            tweener.OnComplete(() => TweenerPostProcess(provider))
+            .OnUpdate(OnUpdate)
+            .OnStart(OnStart);
         }
         public static void StopPreview(this DotweenAnimProviderManager manager)
         {

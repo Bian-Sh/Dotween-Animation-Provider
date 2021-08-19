@@ -73,7 +73,7 @@ namespace zFramework.Extension.Tweening
                 }
                 else
                 {
-                    provider.StartPreview(OnTweenerUpdating);
+                    provider.StartPreview(OnTweenerStart,OnTweenerUpdating);
                 }
             }
 
@@ -95,7 +95,7 @@ namespace zFramework.Extension.Tweening
                     {
                         foreach (var item in providers)
                         {
-                            item.StartPreview(() => OnTweenerUpdating(item));
+                            item.StartPreview(()=>OnTweenerStart(providers),() => OnTweenerUpdating(item));
                         }
                     }
                 }
@@ -103,26 +103,35 @@ namespace zFramework.Extension.Tweening
             GUILayout.EndHorizontal();
         }
 
+        bool isTweenerTargetNeedSetDirty = false;
+        public virtual void OnTweenerStart(DoTweenBaseProvider[] providers)
+        {
+            isTweenerTargetNeedSetDirty = providers.Any(v => DotweenProviderSettings.VerifyTargetNeedSetDirty(v.target));
+        }
+
+        public virtual void OnTweenerStart()
+        {
+            isTweenerTargetNeedSetDirty = DotweenProviderSettings.VerifyTargetNeedSetDirty(provider.target);
+        }
+
         public virtual void OnTweenerUpdating()
         {
-            //TextMeshPro UGUI 需要通过这个方式刷新
-            // 同理，不排除其他组件也需要 SetDirty ，可以在扩展时留意
-            if (provider.target is TextMeshProUGUI|| provider.target is UnityEngine.UI.Text)
+            //想要预览 TextMeshPro UGUI 、Text 就必须刷新
+            // 其他类型，请在 DotweenProviderSettings 中设置
+            if (isTweenerTargetNeedSetDirty)
             {
                 EditorUtility.SetDirty(provider.target);
             }
         }
         public virtual void OnTweenerUpdating(DoTweenBaseProvider provider)
         {
-            //TextMeshPro UGUI 需要通过这个方式刷新
-            // 同理，不排除其他组件也需要 SetDirty ，可以在扩展时留意
-            if (provider.target is TextMeshProUGUI || provider.target is UnityEngine.UI.Text)
+            if (isTweenerTargetNeedSetDirty)
             {
                 EditorUtility.SetDirty(provider.target);
             }
         }
         public virtual void OnDisable() => provider.StopPreview();
-        public virtual void OnEnable() => provider = target as DoTweenBaseProvider;
+        public virtual void OnEnable()=>provider = target as DoTweenBaseProvider;
 
         #region 辅助绘制方法
         static List<string> fields;
