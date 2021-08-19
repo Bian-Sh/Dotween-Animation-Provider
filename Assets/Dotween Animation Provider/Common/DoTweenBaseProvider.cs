@@ -35,10 +35,12 @@ namespace zFramework.Extension.Tweening
                          .SetEase(ease)
                          .SetLoops(loopcount, loopType)
                          .SetTarget(target);
+      
         }
 
         public abstract Tweener InitTween();
 
         public virtual void Stop()=>tweener?.Kill();
+        public virtual void Rewind()=>tweener?.Rewind();
     }
 }

@@ -71,7 +71,7 @@ namespace zFramework.Extension.Tweening
         public static bool IsPreviewing(this IDoTweenProviderBehaviours provider)
         {
             return !EditorApplication.isPlayingOrWillChangePlaymode 
-                && null != provider 
+                &&null != provider 
                 && null != provider.Tweener 
                 && provider.Tweener.active
                 && provider.Tweener.IsPlaying() 

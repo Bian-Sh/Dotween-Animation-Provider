@@ -8,6 +8,7 @@ namespace zFramework.Extension.Tweening
         bool IsPlaying { get; }
         Tweener InitTween();
         void Play();
+        void Rewind();
         void Stop();
     }
 }
