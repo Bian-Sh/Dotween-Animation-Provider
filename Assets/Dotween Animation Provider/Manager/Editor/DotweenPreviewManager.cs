@@ -139,8 +139,9 @@ namespace zFramework.Extension.Tweening
             var tweener = provider.Tweener;
             if (tweeners.Contains(tweener))
             {
-                provider.Stop();
-                tweener.Reset(); //复位 Dotween 的修改
+                tweener.Reset(); //先复位 Dotween 的修改
+                provider.Stop(); //再调用户停止逻辑，里面可能有组件自身复位逻辑
+                EditorUtility.SetDirty(((Component)provider).gameObject); //最后重置脏标记，避免复位数据丢失
                 tweeners.Remove(tweener);
                 UpdateManagerState();
             }

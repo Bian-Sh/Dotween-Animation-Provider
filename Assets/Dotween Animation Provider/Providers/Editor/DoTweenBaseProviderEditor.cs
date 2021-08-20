@@ -14,6 +14,7 @@ namespace zFramework.Extension.Tweening
         GUIStyle bt;
         GUIStyle fds;
         SerializedProperty loopcount;
+        SerializedProperty duration;
         public override void OnInspectorGUI()
         {
             #region Init GUIStyle
@@ -27,6 +28,8 @@ namespace zFramework.Extension.Tweening
             #region 数据校验
             loopcount = loopcount ?? serializedObject.FindProperty("loopcount");
             loopcount.intValue = loopcount.intValue < -1 ? -1 : loopcount.intValue;
+            duration= duration?? serializedObject.FindProperty("duration");
+            duration.floatValue= duration.floatValue<=0? 0.1f :duration.floatValue;
             #endregion
 
             var itr = serializedObject.GetIterator();

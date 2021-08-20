@@ -6,12 +6,16 @@ This is a very simple plugin for preview dotween animation in unity editor but w
 
 # 功能 / Feature
 * 提供对游戏对象的 Postion 、 Rotation 、Deltasize 、 Color 补间动画的预览,当然扩展起来方便的一匹。
-  Provide Preview for tweening Postion 、 Rotation 、Deltasize 、 Color ，easy extension yourself.
+ 
+	Provide Preview for tweening Postion 、 Rotation 、Deltasize 、 Color ，easily extension by yourself.
+
 * 组件式，按需挂载，可以组合实现复杂的功能
-  Component design in mind, mount on demand, can be combined to achieve complex functions.
+
+	Component design in mind, mount on demand, can be combined to achieve complex functions.
   
 * 提供多种预览方式。
-  There are several way for previewing you tweener.
+	
+	There are several ways for previewing your tweener.
 
 # 动画 / Gifs 
 > Position 、Rotation 、 DeltaSize
@@ -32,4 +36,6 @@ This is a very simple plugin for preview dotween animation in unity editor but w
 
 ![](doc/Preview-All.gif)
 
+> Loading effect for ``Text`` and ``TextMeshPro``, one ``TextLoadingAnimationProvider`` for them two.
 
+![](doc/loading.gif)
