@@ -1,0 +1,16 @@
+{
+    "name": "com.sharelib.enumex.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d99ca1b70b10f68409c6f91a75ce1319"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

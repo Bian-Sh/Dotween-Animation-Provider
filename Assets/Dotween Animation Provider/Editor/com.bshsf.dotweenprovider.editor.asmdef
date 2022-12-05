@@ -1,0 +1,16 @@
+{
+    "name": "com.bshsf.dotweenprovider.editor",
+    "references": [
+        "GUID:6e46be1da101350448b13ee663d581d8",
+        "GUID:54a01221fdab59946bfc93cd000d9d5e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

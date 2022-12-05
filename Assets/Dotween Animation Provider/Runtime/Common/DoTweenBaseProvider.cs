@@ -8,7 +8,7 @@ namespace zFramework.Extension.Tweening
     {
         [HideInInspector] public Object target;
         [Tooltip("勾上后，每次当游戏对象激活时开始播放动画")]
-        public bool playOnAwake = true;
+        public bool playOnAwake = false;
         [Tooltip("勾上后，动画完成既销毁，需要回放(Rewind)请设为 false")]
         public bool setAutoKill =  true;
         public float delay = 0f;
