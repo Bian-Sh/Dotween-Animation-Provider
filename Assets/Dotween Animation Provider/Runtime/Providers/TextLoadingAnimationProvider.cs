@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +12,7 @@ namespace zFramework.Extension.Tweening
     {
         [Header("For Text  and TextMeshPro")]
         public Graphic text;
+        private string cached;
         public string Text
         {
             get => text is Text ? (text as Text).text : (text as TextMeshProUGUI).text;
@@ -34,7 +35,7 @@ namespace zFramework.Extension.Tweening
             if (text)
             {
                 string[] dots = { "   ", ".  ", ".. ", "...", };
-                var msg = Text;
+                var msg = cached = Text;
                 tweener = DOTween.To(() => 0, v => Text = $"{msg}{dots[v]}", 3, duration);
                 target = text; //这个必须写！
             }
@@ -48,7 +49,7 @@ namespace zFramework.Extension.Tweening
         {
             base.Stop();
             tweener = null;
-            Text = Text.Substring(0,Text.Length-3); //由于 getter 不是 Text 组件本身，所以倒带后会多仨空格，干掉即可
+            Text = cached;
         }
         public override void OnValidate()
         {
